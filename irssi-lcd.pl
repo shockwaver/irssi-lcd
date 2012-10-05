@@ -76,8 +76,6 @@ sub lcd_print {
 		# Not a highlight message to a public channel
 		return;
 	}
-	Irssi::print("init text: $stripped", MSGLEVEL_CLIENTCRAP);
-	# print Dumper($stripped);
 	# extract nickname from format: <Username>
 	$stripped=~m/<(.*)\>.*/;
 	my $nickname=$1;
@@ -91,16 +89,14 @@ sub lcd_print {
 
 	# $stripped=~m/<.*> (.{0,20})(.{0,20})\s(.*)/;
 	$stripped=~m/<.*> (.{0,20})(.{1,20})?\s(.*)/;
-	print Dumper($1);
-	print Dumper($2);
-	print Dumper($3);
+
 	$line2=$1;
 	# if we have a match on part two
 	if ($2) {$line3=$2;}
 	#if the match is on part 3, and part 2
 	if ($3 && $2) {$line4=$3." -- ";}
 	#if the match is on part 3, and not on part 2
-	if ($3 && !$2) {$line3=$3; $line4=" ";)
+	if ($3 && !$2) {$line3=$3; $line4=" ";}
 	
 	# client_print("line2: $1");
 	# client_print("line3: $2");
