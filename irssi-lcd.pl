@@ -25,12 +25,12 @@ sub client_print {
 }
 
 sub init_lcd {
-	client_print("irssi-lcd Attempting to connect to lcdproc server... ");
+	client_print("irssi-lcd attempting to connect to lcdproc server... ");
 	if ($lcd_handle = IO::Socket::INET->new(Proto     => "tcp", 
 			PeerAddr  => "localhost", 
 			PeerPort  => "13666"))
 	{ 
-		client_print("Successfully connected to lcdproc server."); 
+		client_print("LCD connection established.."); 
 		# establish lcd connection
 		print $lcd_handle "hello\n";
 		print $lcd_handle "client_set -name irssi\n";
