@@ -113,4 +113,4 @@ sub lcd_print {
 	}
 }
 
-# Irssi::signal_add('print text', 'lcd_print');
+Irssi::signal_add('print text', 'lcd_print');
