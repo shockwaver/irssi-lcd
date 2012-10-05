@@ -79,6 +79,7 @@ sub lcd_print {
 	# extract nickname from format: <Username>
 	$text=~m/<(.*)\>.*/;
 	my $nickname=$1;
+	client_print("nickname: $nickname");
 	
 	# break down the tweet in to LCd friendly lines
 	# new regex (.{0,20})(.{0,20})\s(.*)
