@@ -19,47 +19,47 @@ my $line2coords="1 2";
 my $line3coords="1 3 20 3 m 2";
 my $line4coords="1 4 20 4 m 2";
 
-init_lcd();
+# init_lcd();
 
 sub client_print {
 	Irssi::print($_[0], MSGLEVEL_CLIENTCRAP);
 }
 
 sub init_lcd {
-	# client_print("irssi-lcd Attempting to connect to lcdproc server... ");
-	# if ($lcd_handle = IO::Socket::INET->new(Proto     => "tcp", 
-			# PeerAddr  => "localhost", 
-			# PeerPort  => "13666"))
-	# { 
-		# client_print("Successfully connected to lcdproc server."); 
-		# # establish lcd connection
-		# print $lcd_handle "hello\n";
-		# print $lcd_handle "client_set -name irssi\n";
+	client_print("irssi-lcd Attempting to connect to lcdproc server... ");
+	if ($lcd_handle = IO::Socket::INET->new(Proto     => "tcp", 
+			PeerAddr  => "localhost", 
+			PeerPort  => "13666"))
+	{ 
+		client_print("Successfully connected to lcdproc server."); 
+		# establish lcd connection
+		print $lcd_handle "hello\n";
+		print $lcd_handle "client_set -name irssi\n";
 		
-		# #add irssi screen
-		# print $lcd_handle "screen_add irssi\n";
-		# print $lcd_handle "screen_set irssi -name irssi\n";
+		#add irssi screen
+		print $lcd_handle "screen_add irssi\n";
+		print $lcd_handle "screen_set irssi -name irssi\n";
 		
-		# #add widgets
-		# print $lcd_handle "widget_add irssi name title\n";
-		# print $lcd_handle "widget_add irssi line2 string\n";
-		# print $lcd_handle "widget_add irssi line3 scroller\n";
-		# print $lcd_handle "widget_add irssi line4 scroller\n";
+		#add widgets
+		print $lcd_handle "widget_add irssi name title\n";
+		print $lcd_handle "widget_add irssi line2 string\n";
+		print $lcd_handle "widget_add irssi line3 scroller\n";
+		print $lcd_handle "widget_add irssi line4 scroller\n";
 		
-		# #show test pattern
-		# print $lcd_handle "widget_set irssi name irssi-lcd\n";
-		# print $lcd_handle "widget_set irssi line2 $line2coords \"irssi-lcd.pl loaded.\"\n";
-		# print $lcd_handle "widget_set irssi line3 $line3coords \"********************\"\n";
-		# print $lcd_handle "widget_set irssi line4 $line4coords \"--------------------\"\n";
-	# }
-	# else
-	# { 
-		# client_print("LCD connection failure.");
-		# #socket enema
-		# $lcd_handle->autoflush(1);
-		# return 0;
-	# }
-	# return 1;
+		#show test pattern
+		print $lcd_handle "widget_set irssi name irssi-lcd\n";
+		print $lcd_handle "widget_set irssi line2 $line2coords \"irssi-lcd.pl loaded.\"\n";
+		print $lcd_handle "widget_set irssi line3 $line3coords \"********************\"\n";
+		print $lcd_handle "widget_set irssi line4 $line4coords \"--------------------\"\n";
+	}
+	else
+	{ 
+		client_print("LCD connection failure.");
+		#socket enema
+		$lcd_handle->autoflush(1);
+		return 0;
+	}
+	return 1;
 }
 
 sub disable_lcd {
