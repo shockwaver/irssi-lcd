@@ -19,7 +19,7 @@ my $line2coords="1 2";
 my $line3coords="1 3 20 3 m 2";
 my $line4coords="1 4 20 4 m 2";
 
-# init_lcd();
+init_lcd();
 
 sub client_print {
 	Irssi::print($_[0], MSGLEVEL_CLIENTCRAP);
@@ -114,4 +114,4 @@ sub lcd_print {
 	}
 }
 
-Irssi::signal_add('print text', 'lcd_print');
+# Irssi::signal_add('print text', 'lcd_print');
