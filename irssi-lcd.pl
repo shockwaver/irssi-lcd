@@ -18,7 +18,7 @@ our %IRSSI = (
 my $line2coords="1 2";
 my $line3coords="1 3 20 3 m 2";
 my $line4coords="1 4 20 4 m 2";
-
+return 1;
 init_lcd();
 
 sub client_print {
