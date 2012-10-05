@@ -71,7 +71,7 @@ sub UNLOAD {
 #this function handles splitting the message and outputting to the LCD screen.
 sub lcd_print {
 	my ($dest, $text, $stripped) = @_;
-	my ($line2, $line3, $line4) = " ";
+	my ($line2, $line3, $line4) = (" "," "," ");
 	if (!(($dest->{level} & MSGLEVEL_HILIGHT) && ($dest->{level} & MSGLEVEL_PUBLIC))) {
 		# Not a highlight message to a public channel
 		return;
@@ -95,10 +95,13 @@ sub lcd_print {
 	print Dumper($2);
 	print Dumper($3);
 	$line2=$1;
-	if ($2) {
-		$line3=$2;
-		if ($3) {$line4=$3." -- ";}
-	}
+	# if we have a match on part two
+	if ($2) {$line3=$2;}
+	#if the match is on part 3, and part 2
+	if ($3 && $2) {$line4=$3." -- ";}
+	#if the match is on part 3, and not on part 2
+	if ($3 && !$2) {$line3=$3; $line4=" ";)
+	
 	# client_print("line2: $1");
 	# client_print("line3: $2");
 	# client_print("line4: $3");
