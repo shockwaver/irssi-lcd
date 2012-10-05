@@ -91,6 +91,9 @@ sub lcd_print {
 
 	# $stripped=~m/<.*> (.{0,20})(.{0,20})\s(.*)/;
 	$stripped=~m/<.*> (.{0,20})(.{1,20})?\s(.*)/;
+	print Dumper($1);
+	print Dumper($2);
+	print Dumper($3);
 	$line2=$1;
 	if ($2) {
 		$line3=$2;
