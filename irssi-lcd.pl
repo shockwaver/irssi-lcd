@@ -71,7 +71,7 @@ sub UNLOAD {
 #this function handles splitting the message and outputting to the LCD screen.
 sub lcd_print {
 	my ($dest, $text, $stripped) = @_;
-	client_print("init text: $text");
+	Irssi::print("init text: $text", MSGLEVEL_CLIENTCRAP);
 	if (!(($dest->{level} & MSGLEVEL_HILIGHT) && ($dest->{level} & MSGLEVEL_PUBLIC))) {
 		# Not a highlight message to a public channel
 		return;
