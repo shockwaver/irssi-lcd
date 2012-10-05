@@ -62,7 +62,7 @@ sub init_lcd {
 	return 1;
 }
 
-sub disable_lcd {
+sub UNLOAD {
 	print $lcd_handle "bye\n";
 	client_print("LCD Connection shutdown.");
 }
@@ -70,13 +70,12 @@ sub disable_lcd {
 #this function handles splitting the message and outputting to the LCD screen.
 sub lcd_print {
 	my ($dest, $text, $stripped) = @_;
-	# Irssi::print("init text: $text", MSGLEVEL_CLIENTCRAP);
-	print $text;
+	
 	if (!(($dest->{level} & MSGLEVEL_HILIGHT) && ($dest->{level} & MSGLEVEL_PUBLIC))) {
 		# Not a highlight message to a public channel
 		return;
 	}
-	
+	Irssi::print("init text: $text", MSGLEVEL_CLIENTCRAP);
 	# extract nickname from format: <Username>
 	$text=~m/<(.*)\>.*/;
 	my $nickname=$1;
@@ -88,13 +87,13 @@ sub lcd_print {
 	# $3 is the rest of the string
 
 	$text=~m/<.*> (.{0,20})(.{0,20})\s(.*)/;
-	# client_print("text after split: $text");
+	client_print("text after split: $text");
 	$line2=$1;
 	$line3=$2;
 	$line4=$3." -- ";
-	# client_print("line2: $1");
-	# client_print("line3: $2");
-	# client_print("line4: $3");
+	client_print("line2: $1");
+	client_print("line3: $2");
+	client_print("line4: $3");
 	
 	
 	if ($lcd_handle)
