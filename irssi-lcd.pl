@@ -22,7 +22,7 @@ my $line4coords="1 4 20 4 m 2";
 init_lcd();
 
 sub client_print {
-	Irssi::print(@_, MSGLEVEL_CLIENTCRAP);
+	Irssi::print($_[0], MSGLEVEL_CLIENTCRAP);
 	return;
 }
 
