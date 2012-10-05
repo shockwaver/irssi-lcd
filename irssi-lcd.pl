@@ -76,10 +76,10 @@ sub lcd_print {
 		# Not a highlight message to a public channel
 		return;
 	}
-	Irssi::print("init text: $text", MSGLEVEL_CLIENTCRAP);
+	Irssi::print("init text: $stripped", MSGLEVEL_CLIENTCRAP);
 	print Dumper($stripped);
 	# extract nickname from format: <Username>
-	$text=~m/<(.*)\>.*/;
+	$stripped=~m/<(.*)\>.*/;
 	my $nickname=$1;
 	client_print("nickname: $nickname");
 	
@@ -89,7 +89,7 @@ sub lcd_print {
 	# $2 is next 20 characters, but will not break up a word at the end
 	# $3 is the rest of the string
 
-	$text=~m/<.*> (.{0,20})(.{0,20})\s(.*)/;
+	$stripped=~m/<.*> (.{0,20})(.{0,20})\s(.*)/;
 	client_print("text after split: $text");
 	$line2=$1;
 	$line3=$2;
