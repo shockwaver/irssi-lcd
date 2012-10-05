@@ -77,7 +77,7 @@ sub lcd_print {
 		return;
 	}
 	Irssi::print("init text: $text", MSGLEVEL_CLIENTCRAP);
-	print Dumper(@_);
+	print Dumper($stripped);
 	# extract nickname from format: <Username>
 	$text=~m/<(.*)\>.*/;
 	my $nickname=$1;
