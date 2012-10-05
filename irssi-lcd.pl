@@ -76,17 +76,17 @@ sub lcd_print {
 	}
 	
 	# extract nickname from format: <Username>
-	$stripped=~m/<(.*)\>.*/;
+	$stripped=~m/<(.*?)\>.*/;
 	my $nickname=$1;
 	
 	# break down the tweet in to LCd friendly lines
-	# new regex (.{0,20})(.{0,20})\s(.*)
+	# new regex <.*?> (.{0,20})(.{1,20})?\s(.*)
 	# $1 is first 20 characters
 	# $2 is next 20 characters, but will not break up a word at the end
 	# $3 is the rest of the string
 
 	# $stripped=~m/<.*> (.{0,20})(.{0,20})\s(.*)/;
-	$stripped=~m/<.*> (.{0,20})(.{1,20})?\s(.*)/;
+	$stripped=~m/<.*?> (.{0,20})(.{1,20})?\s(.*)/;
 
 	$line2=$1;
 	# if we have a match on part two
