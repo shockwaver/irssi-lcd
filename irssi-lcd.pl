@@ -1,10 +1,8 @@
 # This script will output messages that trigger your hilight to a 20x4 LCD screen running via LCDd/lcdproc
-# /irssi-lcd help to view options
 
 use warnings;
 use IO::Socket;
 use Irssi;
-use Data::Dumper;
 
 our $VERSION = '1.00';
 our %IRSSI = (
@@ -76,10 +74,10 @@ sub lcd_print {
 		# Not a highlight message to a public channel
 		return;
 	}
+	
 	# extract nickname from format: <Username>
 	$stripped=~m/<(.*)\>.*/;
 	my $nickname=$1;
-	# client_print("nickname: $nickname");
 	
 	# break down the tweet in to LCd friendly lines
 	# new regex (.{0,20})(.{0,20})\s(.*)
@@ -96,12 +94,7 @@ sub lcd_print {
 	#if the match is on part 3, and part 2
 	if ($3 && $2) {$line4=$3." -- ";}
 	#if the match is on part 3, and not on part 2
-	if ($3 && !$2) {$line3=$3; $line4=" ";}
-	
-	# client_print("line2: $1");
-	# client_print("line3: $2");
-	# client_print("line4: $3");
-	
+	if ($3 && !$2) {$line3=$3; $line4=" ";}	
 	
 	if ($lcd_handle)
 	{ 
