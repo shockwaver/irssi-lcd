@@ -58,9 +58,9 @@ sub init_lcd {
 		client_print("LCD connection failure.");
 		#socket enema
 		$lcd_handle->autoflush(1);
-		return;
+		return 0;
 	}
-	return;
+	return 1;
 }
 
 sub UNLOAD {
