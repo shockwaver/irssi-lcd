@@ -27,7 +27,7 @@ sub client_print {
 }
 
 sub init_lcd {
-	client_print("irssi-lcd Attempting to connect to lcdproc server... ";
+	client_print("irssi-lcd Attempting to connect to lcdproc server... ");
 	if ($lcd_handle = IO::Socket::INET->new(Proto     => "tcp", 
 			PeerAddr  => "localhost", 
 			PeerPort  => "13666"))
@@ -77,7 +77,7 @@ sub lcd_print {
 	}
 	
 	#extract nickname from format: <Username>
-	$text=~m/<(.*)\>.*/
+	$text=~m/<(.*)\>.*/;
 	my $nickname=$1;
 	
 	# break down the tweet in to LCd friendly lines
