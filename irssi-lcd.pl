@@ -18,11 +18,11 @@ our %IRSSI = (
 my $line2coords="1 2";
 my $line3coords="1 3 20 3 m 2";
 my $line4coords="1 4 20 4 m 2";
-return 1;
+
 init_lcd();
 
 sub client_print {
-	Irssi::print(@_, MSGLEVEL_CLIENTCRAP);
+	Irssi::print($_[0], MSGLEVEL_CLIENTCRAP);
 }
 
 sub init_lcd {
@@ -62,7 +62,7 @@ sub init_lcd {
 	return 1;
 }
 
-sub UNLOAD {
+sub disable_lcd {
 	print $lcd_handle "bye\n";
 	client_print("LCD Connection shutdown.");
 }
