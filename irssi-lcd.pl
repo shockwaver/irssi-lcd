@@ -48,7 +48,7 @@ sub init_lcd {
 		print $lcd_handle "widget_add irssi line4 scroller\n";
 		
 		#show test pattern
-		print $lcd_handle "widget_set irssi name lcdnotify.pl\n";
+		print $lcd_handle "widget_set irssi name irssi-lcd\n";
 		print $lcd_handle "widget_set irssi line2 $line2coords \"irssi-lcd.pl loaded.\"\n";
 		print $lcd_handle "widget_set irssi line3 $line3coords \"********************\"\n";
 		print $lcd_handle "widget_set irssi line4 $line4coords \"--------------------\"\n";
@@ -86,7 +86,7 @@ sub lcd_print {
 	# $2 is next 20 characters, but will not break up a word at the end
 	# $3 is the rest of the string
 
-	$text=~m/(.{0,20})(.{0,20})\s(.*)/;
+	$text=~m/<.*> (.{0,20})(.{0,20})\s(.*)/;
 	$line2=$1;
 	$line3=$2;
 	$line4=$3." -- ";
@@ -94,7 +94,7 @@ sub lcd_print {
 	if ($lcd_handle)
 	{ 
 		print $lcd_handle "hello\n";
-		print $lcd_handle "widget_set irssi name \"$username\"\n";
+		print $lcd_handle "widget_set irssi name \"$nickname\"\n";
 		# Clear the screen before showing the tweet - this should prevent overlap issues
 		print $lcd_handle "widget_set irssi line2 $line2coords \" \"\n";
 		print $lcd_handle "widget_set irssi line3 $line3coords \" \"\n";
