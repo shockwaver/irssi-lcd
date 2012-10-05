@@ -23,7 +23,6 @@ init_lcd();
 
 sub client_print {
 	Irssi::print($_[0], MSGLEVEL_CLIENTCRAP);
-	return;
 }
 
 sub init_lcd {
