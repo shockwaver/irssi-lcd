@@ -4,6 +4,7 @@
 use warnings;
 use IO::Socket;
 use Irssi;
+use Data::Dumper;
 
 our $VERSION = '1.00';
 our %IRSSI = (
@@ -76,6 +77,7 @@ sub lcd_print {
 		return;
 	}
 	Irssi::print("init text: $text", MSGLEVEL_CLIENTCRAP);
+	print Dumper(@_);
 	# extract nickname from format: <Username>
 	$text=~m/<(.*)\>.*/;
 	my $nickname=$1;
