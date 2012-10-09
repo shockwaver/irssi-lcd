@@ -43,6 +43,9 @@ sub init_lcd {
 		print $lcd_handle "screen_add irssi\n";
 		print $lcd_handle "screen_set irssi -name irssi\n";
 		
+		#initalization - drop priority to background
+		print $lcd_handle "screen_set irssi -priority 224\n";
+		
 		#add widgets
 		print $lcd_handle "widget_add irssi name title\n";
 		print $lcd_handle "widget_add irssi line2 string\n";
@@ -103,6 +106,9 @@ sub lcd_print {
 	if ($lcd_handle)
 	{ 
 		print $lcd_handle "hello\n";
+		# we have a hilight - set priority to high to show immediately. Priority 16 will show instantly.
+		print $lcd_handle "screen_set irssi -priority 16\n";
+		# Set title as nickname from hilight message
 		print $lcd_handle "widget_set irssi name \"$nickname\"\n";
 		# Clear the screen before showing the tweet - this should prevent overlap issues
 		print $lcd_handle "widget_set irssi line2 $line2coords \" \"\n";
@@ -117,4 +123,11 @@ sub lcd_print {
 	}
 }
 
+# when called, lowers the priority of the screen to background
+sub drop_priority {
+	print $lcd_handle "hello\n";
+	print $lcd_handle "screen_set irssi -priority 224\n";
+}
+
 Irssi::signal_add('print text', 'lcd_print');
+Irssi::signal_add('send command', 'drop_priority');
