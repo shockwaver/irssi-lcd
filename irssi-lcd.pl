@@ -133,3 +133,4 @@ Irssi::signal_add('print text', 'lcd_print');
 # trigger on any command or window change - lower priority. Assumes the user has seen the message.
 Irssi::signal_add('send command', 'drop_priority');
 Irssi::signal_add('window changed', 'drop_priority');
+Irssi::signal_add('gui key pressed', 'drop_priority');
