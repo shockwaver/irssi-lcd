@@ -1,10 +1,14 @@
 # This script will output messages that trigger your hilight to a 20x4 LCD screen running via LCDd/lcdproc
+# TODO - Add commands for help, enable and disable.
+#	   - Set priority LOW on initialize
+#      - Set priority HIGH when hilight triggered
+#      - Set priority LOW when a command or text is entered (assumed user has looked at hilight)
 
 use warnings;
 use IO::Socket;
 use Irssi;
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 our %IRSSI = (
   authors     => 'shockwaver',
   contact     => 'irssi@shockwaver.org',
