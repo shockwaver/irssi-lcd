@@ -1,8 +1,5 @@
 # This script will output messages that trigger your hilight to a 20x4 LCD screen running via LCDd/lcdproc
 # TODO - Add commands for help, enable and disable.
-#	   - Set priority LOW on initialize
-#      - Set priority HIGH when hilight triggered
-#      - Set priority LOW when a command or text is entered (assumed user has looked at hilight)
 
 use warnings;
 use IO::Socket;
@@ -130,7 +127,5 @@ sub drop_priority {
 }
 
 Irssi::signal_add('print text', 'lcd_print');
-# trigger on any command or window change - lower priority. Assumes the user has seen the message.
-Irssi::signal_add('send command', 'drop_priority');
-Irssi::signal_add('window changed', 'drop_priority');
+# trigger on any key press - lower priority. Assumes the user has seen the message.
 Irssi::signal_add('gui key pressed', 'drop_priority');
