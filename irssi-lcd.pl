@@ -1,11 +1,10 @@
 # This script will output messages that trigger your hilight to a 20x4 LCD screen running via LCDd/lcdproc
-# TODO - Add commands for help, enable and disable.
 
 use warnings;
 use IO::Socket;
 use Irssi;
 
-our $VERSION = '1.01';
+our $VERSION = '1.04';
 our %IRSSI = (
   authors     => 'shockwaver',
   contact     => 'irssi@shockwaver.org',
@@ -155,7 +154,7 @@ Irssi::command_bind('irssi-lcd', sub {
 		client_print("irssi-lcd - Print hilights to external LCD screen.");
 		client_print("  /irssi-lcd              Display this help.");
 		client_print("  /irssi-lcd restart      Close and reopen LCD connection.");
-		client_print("  /irssi-lcd enable		Open LCD connection and enable output.");
+		client_print("  /irssi-lcd enable       Open LCD connection and enable output.");
 		client_print("  /irssi-lcd disable      Close LCD connection and disable output.");
 	}
 	Irssi::signal_stop;
