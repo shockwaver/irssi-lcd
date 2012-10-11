@@ -135,9 +135,10 @@ Irssi::command_bind('irssi-lcd', sub {
 		UNLOAD();
 		init_lcd();
 	} else {
-		client_print("irssi-lcd - Print hilights to external LCD screen.\n",
-					 "  /irssi-lcd				Display this help.\n",
-					 "  /irssi-lcd restart		Close and reopen LCD connection.");
+		client_print("irssi-lcd - Print hilights to external LCD screen.");
+		client_print("  /irssi-lcd				Display this help.");
+		client_print("  /irssi-lcd restart		Close and reopen LCD connection.");
 	}
 	Irssi::signal_stop;
 }
+);
