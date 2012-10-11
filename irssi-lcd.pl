@@ -19,6 +19,7 @@ my $line2coords="1 2";
 my $line3coords="1 3 20 3 m 2";
 my $line4coords="1 4 20 4 m 2";
 
+Irssi::settings_add_bool("irssi_lcd", "irssi_lcd_enabled", 1);
 init_lcd();
 
 sub client_print {
@@ -72,12 +73,16 @@ sub UNLOAD {
 
 #this function handles splitting the message and outputting to the LCD screen.
 sub lcd_print {
-	my ($dest, $text, $stripped) = @_;
-	my ($line2, $line3, $line4) = (" "," "," ");
 	if (!(($dest->{level} & MSGLEVEL_HILIGHT) && ($dest->{level} & MSGLEVEL_PUBLIC))) {
 		# Not a highlight message to a public channel
 		return;
 	}
+	if ( !Irssi::settings_get_bool("irssi_lcd_enabled") ) { 
+		# output is disabled
+		return; 
+	}
+	my ($dest, $text, $stripped) = @_;
+	my ($line2, $line3, $line4) = (" "," "," ");
 	
 	# extract nickname from format: <Username>
 	$stripped=~m/<(.*?)\>.*/;
@@ -132,12 +137,26 @@ Irssi::signal_add('gui key pressed', 'drop_priority');
 
 Irssi::command_bind('irssi-lcd', sub {
 	if ($_[0] eq "restart" ) {
+		client_print("Restarting LCD connections...");
 		UNLOAD();
 		init_lcd();
+		if ( !Irssi::settings_get_bool("irssi_lcd_enabled") ) {
+			client_print("LCD output currently disabled. /irssi-lcd enable to renable.");
+		}
+	} elsif ($_[0] eq "enable") {
+		Irssi::settings_set_bool("irssi_lcd_enabled", 1);
+		Irssi::signal_emit("setup changed");
+		client_print("LCD output is now enabled.");
+	} elseif ($_[0] eq "disable") {
+		Irssi::settings_set_bool("irssi_lcd_enabled", 0);
+		Irssi::signal_emit("setup changed");
+		client_print("LCD output is now disabled.");
 	} else {
 		client_print("irssi-lcd - Print hilights to external LCD screen.");
-		client_print("  /irssi-lcd				Display this help.");
-		client_print("  /irssi-lcd restart		Close and reopen LCD connection.");
+		client_print("  /irssi-lcd              Display this help.");
+		client_print("  /irssi-lcd restart      Close and reopen LCD connection.");
+		client_print("  /irssi-lcd enable		Open LCD connection and enable output.");
+		client_print("  /irssi-lcd disable      Close LCD connection and disable output.");
 	}
 	Irssi::signal_stop;
 }
