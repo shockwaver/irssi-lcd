@@ -129,3 +129,15 @@ sub drop_priority {
 Irssi::signal_add('print text', 'lcd_print');
 # trigger on any key press - lower priority. Assumes the user has seen the message.
 Irssi::signal_add('gui key pressed', 'drop_priority');
+
+Irssi::command_bind('irssi-lcd', sub {
+	if ($_[0] eq "restart" {
+		UNLOAD();
+		init_lcd();
+	} else {
+		client_print("irssi-lcd - Print hilights to external LCD screen.\n",
+					 "  /irssi-lcd				Display this help.\n",
+					 "  /irssi-lcd restart		Close and reopen LCD connection.";
+	}
+	Irssi::signal_stop;
+}
