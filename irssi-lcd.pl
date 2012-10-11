@@ -73,16 +73,16 @@ sub UNLOAD {
 
 #this function handles splitting the message and outputting to the LCD screen.
 sub lcd_print {
-	if (!(($dest->{level} & MSGLEVEL_HILIGHT) && ($dest->{level} & MSGLEVEL_PUBLIC))) {
-		# Not a highlight message to a public channel
-		return;
-	}
 	if ( !Irssi::settings_get_bool("irssi_lcd_enabled") ) { 
 		# output is disabled
 		return; 
 	}
 	my ($dest, $text, $stripped) = @_;
 	my ($line2, $line3, $line4) = (" "," "," ");
+	if (!(($dest->{level} & MSGLEVEL_HILIGHT) && ($dest->{level} & MSGLEVEL_PUBLIC))) {
+		# Not a highlight message to a public channel
+		return;
+	}
 	
 	# extract nickname from format: <Username>
 	$stripped=~m/<(.*?)\>.*/;
@@ -147,7 +147,7 @@ Irssi::command_bind('irssi-lcd', sub {
 		Irssi::settings_set_bool("irssi_lcd_enabled", 1);
 		Irssi::signal_emit("setup changed");
 		client_print("LCD output is now enabled.");
-	} elseif ($_[0] eq "disable") {
+	} elsif ($_[0] eq "disable") {
 		Irssi::settings_set_bool("irssi_lcd_enabled", 0);
 		Irssi::signal_emit("setup changed");
 		client_print("LCD output is now disabled.");
